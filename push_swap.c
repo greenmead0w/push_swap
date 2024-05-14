@@ -1,13 +1,13 @@
 
 
 /*
-    int check_input(int argc, char **argv)
+    int input_transform(int argc, char **argv)
     {
         int i = 1; 
         if (argc == 1 || argv[1][0] == '\0')
             return 1;
         if (argc == 2)
-            argv = ft_split(argv[1], ' ');
+            split_argv = ft_split(argv[1], ' ');
         if (argc > 2)
             while (i <= argc)
             atoi(i)
@@ -16,11 +16,11 @@
 
 */
 
-int main(int argc, char **argv)
+/*int main(int argc, char **argv)
 {
-    /*
-        if(check_input(argc, argv) == 1)
+    
+        if(input_transform(argc, argv) == 1)
             return (1);
 
-    */
-}
+    
+}*/
