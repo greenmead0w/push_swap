@@ -17,7 +17,7 @@ typedef struct s_node
 	bool				cheapest;
 	struct s_node	*target_node;
 	struct s_node	*next;
-	struct s_node	*prev;
+	struct s_node	*previous;
 }				t_node;	
 
 //stack_build.c
