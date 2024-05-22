@@ -18,7 +18,7 @@ int is_num(char *str)
     return 1;
 }
 
-int is_duplicate(t_stack_node *a, int number)
+int is_duplicate(t_node *a, int number)
 {
     while (a != NULL)
     {

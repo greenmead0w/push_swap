@@ -7,7 +7,7 @@
 #define INT_MAX 2147483647
 #define INT_MIN -2147483648
 
-typedef struct s_node
+typedef struct s_list
 {
 	int					value;
 	int					current_position;
@@ -15,20 +15,34 @@ typedef struct s_node
 	int					push_price;
 	bool				above_median;
 	bool				cheapest;
-	struct s_node	*target_node;
-	struct s_node	*next;
-	struct s_node	*previous;
-}				t_node;	
+	struct s_list	*target_node;
+	struct s_list	*next;
+	struct s_ist	*previous;
+}				t_list;	
 
-//stack_build.c
+//stack_builder.c
 long	ft_atol(const char *str);
 
 //errors.c
 int 	is_num(char *str);
-int		is_duplicate(t_stack_node *a, int number);
+int		is_duplicate(t_list *a, int number);
 void	free_split(char **argv);
-void	free_stack(t_node **a);
-void	unwind(t_node **a, char **argv, int flag);
+void	free_stack(t_list **a);
+void	unwind(t_list **a, char **argv, int flag);
+
+//sorting.c
+
+//sorting_utils.c
+t_list *largest_node(t_list *header);
+
+//commands.c
+void swap(t_list **header, char *command);
+void stack_push(t_list **a_header, t_list **b_header, char *command);
+void rotate(t_list **header, char *command);
+void reverse_rotate(t_list **header, char *command);
+
+
+
 
 
 
