@@ -18,5 +18,12 @@ int main(int argc, char **argv)
     }
     else
         stack_build(&a, argv + 1, flag);
+
+    //check if stack_sorted
+    //check if lstsize == 2 (and if it is swap)
+    //
+
+
+
     return 0;    
 }
