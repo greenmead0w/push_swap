@@ -4,11 +4,11 @@
 //target_node
 //stack_sorted
 
-t_node *largest_node(t_node *header)
+t_dlist *largest_node(t_dlist *header)
 {
-    t_node *l_node;
+    t_dlist *l_node;
 
-    l_node = header;s
+    l_node = header;
     if (header == NULL)
         return(NULL);
     while(header != NULL)

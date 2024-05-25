@@ -6,7 +6,9 @@ int is_num(char *str)
     int i;
 
     i = 0;
-    if (str[i] == '+' || str[i] == '-' && ft_isdigit(str[i+1]) == 0 ) // qué pasa si input es ./pus_swap +
+    if (!(str[i] == '+' || str[i] == '-') && (str[i] < '0' || str[i] > '9'))
+        return (0);
+    if ((str[i] == '+' || str[i] == '-') && ft_isdigit(str[i+1]) == 0 ) // qué pasa si input es ./push_swap +
         return 0;
     i++;
     while(str[i] != '\0')
@@ -18,7 +20,7 @@ int is_num(char *str)
     return 1;
 }
 
-int is_duplicate(t_node *a, int number)
+int is_duplicate(t_dlist *a, int number)
 {
     while (a != NULL)
     {
@@ -44,10 +46,10 @@ void	free_split(char **argv)
 	free(argv);
 }
 
-void	free_stack(t_node **a)
+void	free_stack(t_dlist **a)
 {
-	t_node	*tmp;
-	t_node	*current;
+	t_dlist	*tmp;
+	t_dlist	*current;
 
 	if (a == NULL)
 		return ;
@@ -60,11 +62,11 @@ void	free_stack(t_node **a)
 	}
 	*a = NULL; // para evitar dangling pointers
 }
-void	unwind(t_node **a, char **argv, int flag)
+void	unwind(t_dlist **a, char **argv, int flag, char *message)
 {
 	free_stack(a);
 	if (flag == 1)
 		free_split(argv);
-	write(2, "Error\n", 6);
+	ft_printf( "Error: %s\n", message);
 	exit(1);
 }

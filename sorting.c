@@ -21,9 +21,9 @@ merge_sort -->orders values in array
 /*check for the largest value, move to bottom
 check for new largest, move to bottom 
 */
-void three_nodes(t_node **header) 
+void three_nodes(t_dlist **header) 
 {
-    t_node largest;
+    t_dlist *largest;
     
     largest = largest_node(*header);
     if (*header == largest)
@@ -31,6 +31,6 @@ void three_nodes(t_node **header)
     else if ((*header)->next == largest)
         reverse_rotate(header, "rra");
     if((*header)->value > (*header)->next->value)
-        swap(*header, "sa");
+        swap(header, "sa");
 }
 

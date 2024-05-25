@@ -29,14 +29,14 @@ long	ft_atol(const char *str)
 	return (result * negative);
 }
 
-void	add_stack(t_node **a, int value)
+void	add_stack(t_dlist **a, int value)
 {
-	t_node	*node;
-	t_node	*last_node;
+	t_dlist	*node;
+	t_dlist	*last_node;
 
 	if (a == NULL)
 		return ;
-	node = malloc(sizeof(t_node));
+	node = malloc(sizeof(t_dlist));
 	if (node == NULL)
 		return ;
 	node->next = NULL;
@@ -48,13 +48,13 @@ void	add_stack(t_node **a, int value)
 	}
 	else
 	{
-		last_node = ft_lstlast(*a);
+		last_node = ft_dlstlast(*a);
 		last_node->next = node;
 		node->previous = last_node;
 	}
 }
 
-void	stack_build(t_node **a, char **argv, int flag)
+void	stack_build(t_dlist **a, char **argv, int flag)
 {
 	long	value;
 	int		i;
@@ -63,13 +63,15 @@ void	stack_build(t_node **a, char **argv, int flag)
 	while (argv[i] != NULL)
 	{
 		if (is_num(argv[i]) == 0) 
-			unwind(a, argv, flag);
+			unwind(a, argv, flag, "is_num");
 		value = ft_atol(argv[i]);
 		if (value < INT_MIN || value > INT_MAX) //checks overflow
-			unwind(a, argv, flag);
-		if (is_duplicate(*a, (int)value)) //checks duplicates
-			unwind(a, argv, flag);
+			unwind(a, argv, flag, "value");
+		if (is_duplicate(*a, (int)value) == 0) //checks duplicates
+			unwind(a, argv, flag, "is_duplicate");
 		add_stack(a, (int)value);
 		i++;
 	}
+	if (flag == 1)
+		free_split(argv);
 }
