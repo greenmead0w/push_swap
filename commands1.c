@@ -14,7 +14,7 @@ void swap(t_dlist **header, char *command)
     ft_printf("%s\n", command);
 
 }
-
+//push a_header on top of b_header
 void stack_push(t_dlist **a_header, t_dlist **b_header, char *command) 
 {
     t_dlist *temp;
@@ -53,7 +53,8 @@ void rotate(t_dlist **header, char *command)
     (*header)->next = NULL;
     *header = last->previous;
     (*header)->previous = NULL;
-    ft_printf("%s\n", command);
+    if (command != NULL)
+        ft_printf("%s\n", command);
 }
 
 void reverse_rotate(t_dlist **header, char *command)
@@ -67,6 +68,23 @@ void reverse_rotate(t_dlist **header, char *command)
     last->previous = NULL;
     *header = last;
     last->next->previous = last;
-    ft_printf("%s\n", command);
+    if (command != NULL)
+        ft_printf("%s\n", command);
+}
+
+void double_moves(t_dlist **header_a, t_list **header_b, char **command)
+{
+    if (ft_strncmp(command, "rr", 2) == 0)
+    {
+        rotate(header_a, NULL); //duda efecto pasar argumento null
+        rotate(header_b, NULL);
+        ft_printf("%s\n", command);
+    }
+    else
+    {
+        reverse_rotate(header_a, NULL); //duda efecto pasar argumento null
+        reverse_rotate(header_b, NULL);
+        ft_printf("%s\n", command);
+    }
 }
 

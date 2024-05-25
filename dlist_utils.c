@@ -25,3 +25,38 @@ t_dlist	*ft_dlstlast(t_dlist *lst)
 	}
 	return (lst);
 }
+
+t_dlist *min_value(t_dlist *header)
+{
+	int min;
+	t_dlist min_node;
+
+	if (header == NULL)
+		return NULL;
+	min = header->value;
+	while (header != NULL)
+	{
+		if (header->value < min)
+		{
+			min = header->value;
+			min_node = header;
+		}
+		header = header->next;
+	}
+	return min_node;
+}
+
+t_dlist *return_min_cost(t_dlist *b)
+{
+	if (b == NULL)
+		return NULL;
+
+	while (b != NULL)
+	{
+		if (b->min_cost == 1)
+			return b;
+		b = b->next;
+	}
+	return NULL;
+
+} 

@@ -6,16 +6,16 @@
 
 #define INT_MAX 2147483647
 #define INT_MIN -2147483648
+#define LONG_MAX 9223372036854775807
 
 typedef struct s_dlist
 {
 	int					value;
-	int					current_position;
-	int					final_index;
-	int					push_price;
-	bool				above_median;
-	bool				cheapest;
-	struct s_dlist	*target_node;
+	int					index;
+	int					cost;
+	int				top_half; //of the stack
+	int				min_cost; //1 if node min cost to move
+	struct s_dlist	*bonded_node;
 	struct s_dlist	*next;
 	struct s_dlist	*previous;
 }				t_dlist;	
