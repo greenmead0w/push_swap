@@ -26,10 +26,10 @@ t_dlist	*ft_dlstlast(t_dlist *lst)
 	return (lst);
 }
 
-t_dlist *min_value(t_dlist *header)
+t_dlist *min_node(t_dlist *header)
 {
 	int min;
-	t_dlist min_node;
+	t_dlist *min_node;
 
 	if (header == NULL)
 		return NULL;
@@ -44,6 +44,22 @@ t_dlist *min_value(t_dlist *header)
 		header = header->next;
 	}
 	return min_node;
+}
+
+t_dlist *largest_node(t_dlist *header)
+{
+    t_dlist *l_node;
+
+    l_node = header;
+    if (header == NULL)
+        return(NULL);
+    while(header != NULL)
+    {
+        if (header->value > l_node->value)
+            l_node = header;
+        header = header->next;
+    }
+    return (l_node);
 }
 
 t_dlist *return_min_cost(t_dlist *b)

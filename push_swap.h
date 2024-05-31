@@ -22,6 +22,7 @@ typedef struct s_dlist
 
 //stack_builder.c
 long	ft_atol(const char *str);
+void	add_stack(t_dlist **a, int value);
 void	stack_build(t_dlist **a, char **argv, int flag);
 
 //errors.c
@@ -35,17 +36,33 @@ void	unwind(t_dlist**a, char **argv, int flag, char *message); //char *message f
 void three_nodes(t_dlist **header);
 
 //sorting_utils.c
-t_dlist *largest_node(t_dlist *header);
+
 
 //commands.c
 void swap(t_dlist **header, char *command);
 void stack_push(t_dlist **a_header, t_dlist **b_header, char *command);
 void rotate(t_dlist **header, char *command);
 void reverse_rotate(t_dlist **header, char *command);
+void double_moves(t_dlist **header_a, t_dlist **header_b, char *command);
 
 //dlist_utils
 int	ft_dlstsize(t_dlist *lst);
 t_dlist	*ft_dlstlast(t_dlist *lst);
+t_dlist *largest_node(t_dlist *header);
+t_dlist *return_min_cost(t_dlist *b);
+t_dlist *min_node(t_dlist *header);
+
+//algo_push_swap.c
+void	push_swap(t_dlist **a, t_dlist **b);
+void execute_moves(t_dlist **a, t_dlist **b);
+void	operate(t_dlist **stack_header, t_dlist *to_move, char *stack);
+
+//algo_set_node_data.c
+void	set_node_data(t_dlist *a, t_dlist *b);
+void	get_min_cost(t_dlist *b);
+void	get_cost(t_dlist *a, t_dlist *b);
+void	bond_nodes(t_dlist *a, t_dlist *b);
+void	get_index(t_dlist *header);
 
 
 

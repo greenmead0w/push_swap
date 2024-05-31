@@ -1,26 +1,14 @@
 #include "push_swap.h"
 
-//needs to be modified
-void	finish_rotation(t_stack_node **stack,
-							t_stack_node *top_node,
-							char stack_name)
+//might need to be more explicit
+void	operate(t_dlist **stack_header, t_dlist *to_move, char *stack)
 {
-	while (*stack != top_node)
+	while (*stack_header != to_move)
 	{
-		if (stack_name == 'a')
-		{
-			if (top_node->above_median)
-				ra(stack, false);
-			else
-				rra(stack, false);
-		}
-		else if (stack_name == 'b')
-		{
-			if (top_node->above_median)
-				rb(stack, false);
-			else
-				rrb(stack, false);
-		}	
+		if (to_move->top_half == 1)
+			rotate(stack_header, ft_strjoin("r", stack)); 
+		else	
+			reverse_rotate(stack_header, ft_strjoin("rr",stack));	
 	}
 }
 
@@ -39,40 +27,42 @@ void execute_moves(t_dlist **a, t_dlist **b)
 		while(*a != to_move->bonded_node && *b != to_move)
 			double_moves(a, b, "rrr");
 	}
-	get_index(*a);
-	get_index(*b);
-	//finish_rotation needs to be added
-
-
+	//get_index(*a);
+	//get_index(*b); // dudas de si me ayuda en algo
+	operate(b, to_move, "b");
+	operate(a, to_move->bonded_node, "a");
+	stack_push(b, a, "pa");
 }
 
 void	push_swap(t_dlist **a, t_dlist **b)
 {
-	t_dlist	*smallest;
+	t_dlist	*min;
 	int				size_a;
 
 	size_a = ft_dlstsize(*a);
-	/*if (size_a == 5)
-		handle_five(a, b);*/
-	else
-	{
-		while (size_a-- > 3)
-			stack_push(a, b, "pb");
-	}
-	three_sort(a);
+	while (size_a-- > 3)
+		stack_push(a, b, "pb");
+	three_nodes(a);
 	while (*b != NULL)
 	{
 		set_node_data(*a, *b);
 		execute_moves(a, b);
 	}
+	//ft_printf("hello2\n");
 	//at this point stack is ordered, but min_element might not be on top
-	//will probably create another function foor this
-	set_current_position(*a); 
-	smallest = find_smallest(*a);
-	if (smallest->above_median)
-		while (*a != smallest)
-			ra(a, false);
+	//will probably create another function for this
+	get_index(*a); 
+	min = min_node(*a);
+	//printf("min node value is: %i, index is: %i, top half is: %i\n", min->value, min->index, min->top_half);
+	printf("a points to: %i and a-next-value is: %i\n", (*a)->value, (*a)->next->value);
+	if (min->top_half == 1)
+		while (*a != min)
+	{
+		rotate(a, "ra");
+
+	}
 	else
-		while (*a != smallest)
-			rra(a, false);
+		while (*a != min)
+			reverse_rotate(a, "rra");
+	//printf("finish\n");
 }

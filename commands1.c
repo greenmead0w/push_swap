@@ -43,18 +43,24 @@ void stack_push(t_dlist **a_header, t_dlist **b_header, char *command)
 
 void rotate(t_dlist **header, char *command)
 {
-    t_dlist *last;
+	t_dlist	*last;
+	int				size;
 
-    if (*header == NULL || (*header)->next == NULL) 
-        return; 
-    last = ft_dlstlast(*header);
-    last->next = *header;
-    (*header)->previous = last;
-    (*header)->next = NULL;
-    *header = last->previous;
-    (*header)->previous = NULL;
+	size = ft_dlstsize(*header);
+	if (header == NULL|| *header == NULL || size == 1)
+		return ;
+	last = ft_dlstlast(*header);
+	last->next = *header;
+	*header = (*header)->next;
+	(*header)->previous = NULL;
+	last->next->previous = last;
+	last->next->next = NULL;
     if (command != NULL)
+    {
         ft_printf("%s\n", command);
+        ft_printf("bug\n");
+    }
+
 }
 
 void reverse_rotate(t_dlist **header, char *command)
@@ -69,10 +75,13 @@ void reverse_rotate(t_dlist **header, char *command)
     *header = last;
     last->next->previous = last;
     if (command != NULL)
+    {
         ft_printf("%s\n", command);
+        ft_printf("bug\n");
+    }
 }
 
-void double_moves(t_dlist **header_a, t_list **header_b, char **command)
+void double_moves(t_dlist **header_a, t_dlist **header_b, char *command)
 {
     if (ft_strncmp(command, "rr", 2) == 0)
     {

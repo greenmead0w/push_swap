@@ -9,9 +9,9 @@ void	get_index(t_dlist *header)
 	int	median;
 
 	i = 0;
-	if (NULL == header)
+	if (header == NULL)
 		return ;
-	median = ft_dlist(header) / 2; // 11 / 2 = 5
+	median = ft_dlstsize(header) / 2; // 11 / 2 = 5
 	while (header != NULL)
 	{
 		header->index = i;
@@ -48,7 +48,7 @@ void	bond_nodes(t_dlist *a, t_dlist *b)
 			temp_a = temp_a->next;
 		}
 		if (closest_value == LONG_MAX)
-			b->bonded_node = min_value(a);
+			b->bonded_node = min_node(a);
 		else
 			b->bonded_node = bond;
 		b = b->next;
@@ -85,6 +85,7 @@ void	get_min_cost(t_dlist *b)
 	if (b == NULL)
 		return ;
 	cost = b->cost;
+	min_cost_node = b;
 	while (b != NULL)
 	{
 		if (b->cost < cost)
@@ -102,7 +103,7 @@ void	set_node_data(t_dlist *a, t_dlist *b)
 {
 	get_index(a);
 	get_index(b);
-	bond_nodes(a, b);
+    bond_nodes(a, b);
 	get_cost(a, b);
 	get_min_cost(b);
 }
