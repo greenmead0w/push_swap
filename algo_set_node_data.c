@@ -29,7 +29,31 @@ void	get_index(t_dlist *header)
     2. if no bigger number, smallest number*/
 void	bond_nodes(t_dlist *a, t_dlist *b)
 {
-	t_dlist	*temp_a;
+	t_dlist	*current_a;
+	t_dlist	*target_node;
+	long			best_match_index;
+
+	while (b)
+	{
+		best_match_index = LONG_MAX;
+		current_a = a;
+		while (current_a)
+		{
+			if (current_a->value > b->value
+				&& current_a->value < best_match_index)
+			{
+				best_match_index = current_a->value;
+				target_node = current_a;
+			}
+			current_a = current_a->next;
+		}
+		if (LONG_MAX == best_match_index)
+			b->bonded_node = min_node(a);
+		else
+			b->bonded_node = target_node;
+		b = b->next;
+	}
+	/*t_dlist	*temp_a;
 	t_dlist	*bond;
 	long	closest_value;
 
@@ -52,7 +76,7 @@ void	bond_nodes(t_dlist *a, t_dlist *b)
 		else
 			b->bonded_node = bond;
 		b = b->next;
-	}
+	}*/
 }
 
 //cost of pushing bond node + node in b to the top of each stack

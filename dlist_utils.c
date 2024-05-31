@@ -28,7 +28,23 @@ t_dlist	*ft_dlstlast(t_dlist *lst)
 
 t_dlist *min_node(t_dlist *header)
 {
-	int min;
+	long			min;
+	t_dlist	*min_node;
+
+	if (header == NULL)
+		return (NULL);
+	min = LONG_MAX;
+	while (header != NULL)
+	{
+		if (header->value < min)
+		{
+			min = header->value;
+			min_node = header;
+		}
+		header = header->next;
+	}
+	return (min_node);
+	/*int min;
 	t_dlist *min_node;
 
 	if (header == NULL)
@@ -44,6 +60,7 @@ t_dlist *min_node(t_dlist *header)
 		header = header->next;
 	}
 	return min_node;
+	*/
 }
 
 t_dlist *largest_node(t_dlist *header)

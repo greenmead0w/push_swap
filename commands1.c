@@ -56,10 +56,8 @@ void rotate(t_dlist **header, char *command)
 	last->next->previous = last;
 	last->next->next = NULL;
     if (command != NULL)
-    {
         ft_printf("%s\n", command);
-        ft_printf("bug\n");
-    }
+
 
 }
 
@@ -75,10 +73,7 @@ void reverse_rotate(t_dlist **header, char *command)
     *header = last;
     last->next->previous = last;
     if (command != NULL)
-    {
         ft_printf("%s\n", command);
-        ft_printf("bug\n");
-    }
 }
 
 void double_moves(t_dlist **header_a, t_dlist **header_b, char *command)

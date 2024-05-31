@@ -27,10 +27,10 @@ void execute_moves(t_dlist **a, t_dlist **b)
 		while(*a != to_move->bonded_node && *b != to_move)
 			double_moves(a, b, "rrr");
 	}
-	//get_index(*a);
-	//get_index(*b); // dudas de si me ayuda en algo
-	operate(b, to_move, "b");
+	get_index(*a);
+	get_index(*b); // dudas de si me ayuda en algo
 	operate(a, to_move->bonded_node, "a");
+	operate(b, to_move, "b");
 	stack_push(b, a, "pa");
 }
 
@@ -54,7 +54,7 @@ void	push_swap(t_dlist **a, t_dlist **b)
 	get_index(*a); 
 	min = min_node(*a);
 	//printf("min node value is: %i, index is: %i, top half is: %i\n", min->value, min->index, min->top_half);
-	printf("a points to: %i and a-next-value is: %i\n", (*a)->value, (*a)->next->value);
+	//printf("a points to: %i and a-next-value is: %i\n", (*a)->value, (*a)->next->value);
 	if (min->top_half == 1)
 		while (*a != min)
 	{
