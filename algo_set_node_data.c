@@ -5,22 +5,22 @@
 sets above_median property*/
 void	get_index(t_dlist *header)
 {
-	int	i;
-	int	median;
+		int	i;
+	int	centerline;
 
 	i = 0;
-	if (header == NULL)
+	if (NULL == header)
 		return ;
-	median = ft_dlstsize(header) / 2; // 11 / 2 = 5
-	while (header != NULL)
+	centerline = ft_dlstsize(header) / 2;
+	while (header)
 	{
 		header->index = i;
-		if (i <= median)
+		if (i <= centerline)
 			header->top_half = 1;
 		else
 			header->top_half = 0;
 		header = header->next;
-		i++;
+		++i;
 	}
 }
 
@@ -82,20 +82,20 @@ void	bond_nodes(t_dlist *a, t_dlist *b)
 //cost of pushing bond node + node in b to the top of each stack
 void	get_cost(t_dlist *a, t_dlist *b)
 {
-	int	size_a;
-	int	size_b;
+	int	len_a;
+	int	len_b;
 
-	size_a = ft_dlstsize(a);
-	size_b = ft_dlstsize(b);
-	while (b != NULL)
+	len_a = ft_dlstsize(a);
+	len_b = ft_dlstsize(b);
+	while (b)
 	{
 		b->cost = b->index;
-		if (b->top_half == 0)
-			b->cost = size_b - (b->index);
+		if (!(b->top_half))
+			b->cost = len_b - (b->index);
 		if (b->bonded_node->top_half)
 			b->cost += b->bonded_node->index;
 		else
-			b->cost += size_a - (b->bonded_node->index);
+			b->cost += len_a - (b->bonded_node->index);
 		b = b->next;
 	}
 }
@@ -103,13 +103,13 @@ void	get_cost(t_dlist *a, t_dlist *b)
 //find node with min cost and set its property to true
 void	get_min_cost(t_dlist *b)
 {
-	int			cost;
+	long			cost;
 	t_dlist	*min_cost_node;
 
 	if (b == NULL)
 		return ;
-	cost = b->cost;
-	min_cost_node = b;
+	cost = LONG_MAX;
+	//min_cost_node = b;
 	while (b != NULL)
 	{
 		if (b->cost < cost)

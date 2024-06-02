@@ -63,32 +63,36 @@ void rotate(t_dlist **header, char *command)
 
 void reverse_rotate(t_dlist **header, char *command)
 {
-    t_dlist	*last;
-    if (*header == NULL || (*header)->next == NULL)
-        return;
-    last = ft_dlstlast(*header);
-    last->previous->next = NULL;
-    last->next = *header;
-    last->previous = NULL;
-    *header = last;
-    last->next->previous = last;
-    if (command != NULL)
+	t_dlist *last;
+	int				len;
+
+	len = ft_dlstsize(*header);
+	if (NULL == *header || NULL == header || 1 == len)
+		return ;
+	last = ft_dlstlast(*header);
+	last->previous->next = NULL;
+	last->next = *header;
+	last->previous = NULL;
+	*header = last;
+	last->next->previous = last;
+     if (command != NULL)
         ft_printf("%s\n", command);
 }
 
 void double_moves(t_dlist **header_a, t_dlist **header_b, char *command)
 {
-    if (ft_strncmp(command, "rr", 2) == 0)
+    if (ft_strncmp(command, "rr", 3) == 0)
     {
         rotate(header_a, NULL); //duda efecto pasar argumento null
         rotate(header_b, NULL);
-        ft_printf("%s\n", command);
     }
-    else
+    else if (ft_strncmp(command, "rrr", 3) == 0)
     {
         reverse_rotate(header_a, NULL); //duda efecto pasar argumento null
         reverse_rotate(header_b, NULL);
-        ft_printf("%s\n", command);
+        //printf("a value is: %i, b value is: %i\n", 
+		//(*header_a)->value, (*header_b)->value);
     }
+    ft_printf("%s\n", command);
 }
 

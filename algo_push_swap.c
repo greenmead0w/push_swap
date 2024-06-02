@@ -24,13 +24,19 @@ void execute_moves(t_dlist **a, t_dlist **b)
 	}
 	else if (to_move->top_half == 0 && to_move->bonded_node->top_half == 0)
 	{
+		//printf("a value is: %i, to_move->bonded_node value is: %i, to_move value is: %i, b value is: %i\n", 
+		//(*a)->value, to_move->bonded_node->value, to_move->value, (*b)->value);
 		while(*a != to_move->bonded_node && *b != to_move)
+		{
 			double_moves(a, b, "rrr");
+			//printf("a value is: %i, to_move->bonded_node value is: %i, to_move value is: %i, b value is: %i\n", 
+			//(*a)->value, to_move->bonded_node->value, to_move->value, (*b)->value);
+		}
 	}
 	get_index(*a);
 	get_index(*b); // dudas de si me ayuda en algo
-	operate(a, to_move->bonded_node, "a");
 	operate(b, to_move, "b");
+	operate(a, to_move->bonded_node, "a");
 	stack_push(b, a, "pa");
 }
 
@@ -43,26 +49,20 @@ void	push_swap(t_dlist **a, t_dlist **b)
 	while (size_a-- > 3)
 		stack_push(a, b, "pb");
 	three_nodes(a);
+	//printfs		
 	while (*b != NULL)
 	{
 		set_node_data(*a, *b);
 		execute_moves(a, b);
 	}
-	//ft_printf("hello2\n");
-	//at this point stack is ordered, but min_element might not be on top
-	//will probably create another function for this
 	get_index(*a); 
 	min = min_node(*a);
-	//printf("min node value is: %i, index is: %i, top half is: %i\n", min->value, min->index, min->top_half);
-	//printf("a points to: %i and a-next-value is: %i\n", (*a)->value, (*a)->next->value);
 	if (min->top_half == 1)
 		while (*a != min)
-	{
-		rotate(a, "ra");
-
-	}
+		{
+			rotate(a, "ra");
+		}
 	else
 		while (*a != min)
 			reverse_rotate(a, "rra");
-	//printf("finish\n");
 }
