@@ -8,12 +8,12 @@ int is_num(char *str)
     i = 0;
     if (!(str[i] == '+' || str[i] == '-') && (str[i] < '0' || str[i] > '9'))
         return (0);
-    if ((str[i] == '+' || str[i] == '-') && ft_isdigit(str[i+1]) == 0 ) // qué pasa si input es ./push_swap +
+    if ((str[i] == '+' || str[i] == '-') && ft_isdigit(str[i+1]) == 0 )
         return 0;
     i++;
     while(str[i] != '\0')
     {
-        if (ft_isdigit(str[i] == 0))
+        if (ft_isdigit(str[i]) == 0)
             return 0;
         i++;
     }
@@ -62,11 +62,11 @@ void	free_stack(t_dlist **a)
 	}
 	*a = NULL; // para evitar dangling pointers
 }
-void	unwind(t_dlist **a, char **argv, int flag, char *message)
+void	unwind(t_dlist **a, char **argv, int flag)
 {
 	free_stack(a);
 	if (flag == 1)
 		free_split(argv);
-	ft_printf( "Error: %s\n", message);
+    write(2, "Error\n", 6);
 	exit(1);
 }

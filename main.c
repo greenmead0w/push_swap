@@ -26,16 +26,16 @@ static int	is_sorted(t_dlist *header)
 }
 
 //routes algo to execute depending on stack size
-static	void	route_algo(t_dlist *a, t_dlist *b)
+static	void	route_algo(t_dlist **a, t_dlist **b)
 {
-	if (is_sorted(a) == 0)
+	if (is_sorted(*a) == 0)
 	{
-		if (ft_dlstsize(a) == 2)
-			swap(&a, "sa");
-		else if (ft_dlstsize(a) == 3)
-			three_nodes(&a);
+		if (ft_dlstsize(*a) == 2)
+			swap(a, "sa");
+		else if (ft_dlstsize(*a) == 3)
+			three_nodes(a);
 		else
-			push_swap(&a, &b);
+			push_swap(a, b);
 	}
 }
 
@@ -59,7 +59,7 @@ int	main(int argc, char **argv)
 	}
 	else
 		stack_build(&a, argv + 1, flag);
-	route_algo(a, b);
+	route_algo(&a, &b);
 	free_stack(&a);
 	return (0);
 }

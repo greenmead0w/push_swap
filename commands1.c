@@ -15,7 +15,7 @@
 void	swap(t_dlist **header, char *command)
 {
 	if (ft_dlstsize(*header) < 2)
-		return ();
+		return;
 	*header = (*header)->next;
 	(*header)->previous->previous = *header;
 	(*header)->previous->next = (*header)->next;
@@ -33,7 +33,7 @@ void	stack_push(t_dlist **a_header, t_dlist **b_header, char *command)
 	t_dlist	*temp;
 
 	if (ft_dlstsize(*a_header) == 0)
-		return ();
+		return;
 	temp = *a_header;
 	*a_header = (*a_header)->next;
 	if (*a_header != NULL)
@@ -103,8 +103,6 @@ void	double_moves(t_dlist **header_a, t_dlist **header_b, char *command)
 	{
 		reverse_rotate(header_a, NULL);
 		reverse_rotate(header_b, NULL);
-        //printf("a value is: %i, b value is: %i\n",
-		//(*header_a)->value, (*header_b)->value);
 	}
 	ft_printf("%s\n", command);
 }

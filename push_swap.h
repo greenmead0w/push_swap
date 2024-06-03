@@ -30,7 +30,7 @@ int 	is_num(char *str);
 int		is_duplicate(t_dlist *a, int number);
 void	free_split(char **argv);
 void	free_stack(t_dlist **a);
-void	unwind(t_dlist**a, char **argv, int flag, char *message); //char *message for debugging, tengo que quitar
+void	unwind(t_dlist**a, char **argv, int flag);
 
 //sorting.c
 void three_nodes(t_dlist **header);

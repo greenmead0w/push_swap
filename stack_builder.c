@@ -13,9 +13,6 @@
 #include "push_swap.h"
 
 // function atol (same as atoi, but helps us with integer overflowing cases)
-// what would happen if I used atoi (int min | int max)
-
-/*why atol and not atoi?*/
 long	ft_atol(const char *str)
 {
 	long		result;
@@ -42,8 +39,7 @@ long	ft_atol(const char *str)
 	return (result * negative);
 }
 
-/*
-*/
+// creates a node and if not the first, appended to last node
 void	add_stack(t_dlist **a, int value)
 {
 	t_dlist	*node;
@@ -81,12 +77,12 @@ void	stack_build(t_dlist **a, char **argv, int flag)
 	while (argv[i] != NULL)
 	{
 		if (is_num(argv[i]) == 0) 
-			unwind(a, argv, flag, "is_num");
+			unwind(a, argv, flag);
 		value = ft_atol(argv[i]);
 		if (value < INT_MIN || value > INT_MAX)
-			unwind(a, argv, flag, "value");
+			unwind(a, argv, flag);
 		if (is_duplicate(*a, (int)value) == 0)
-			unwind(a, argv, flag, "is_duplicate");
+			unwind(a, argv, flag);
 		add_stack(a, (int)value);
 		i++;
 	}

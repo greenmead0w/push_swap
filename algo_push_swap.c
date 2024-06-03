@@ -1,16 +1,42 @@
 #include "push_swap.h"
 
-//might need to be more explicit
-void	operate(t_dlist **stack_header, t_dlist *to_move, char *stack)
+/*check for the largest value, move to bottom
+check for new largest, move to bottom 
+*/
+void three_nodes(t_dlist **header) 
 {
-	while (*stack_header != to_move)
-	{
-		if (to_move->top_half == 1)
-			rotate(stack_header, ft_strjoin("r", stack)); //valgrind leaks
-		else	
-			reverse_rotate(stack_header, ft_strjoin("rr",stack));	//valgrind leaks
-	}
+    t_dlist *largest;
+    
+    largest = largest_node(*header);
+    if (*header == largest)
+        rotate(header, "ra");
+    else if ((*header)->next == largest)
+        reverse_rotate(header, "rra");
+    if((*header)->value > (*header)->next->value)
+        swap(header, "sa");
 }
+
+void operate(t_dlist **stack_header, t_dlist *to_move, char *stack)
+{
+    char *operation;
+
+    while (*stack_header != to_move)
+    {
+        if (to_move->top_half == 1)
+        {
+            operation = ft_strjoin("r", stack);
+            rotate(stack_header, operation);
+            free(operation);
+        }
+        else
+        {
+            operation = ft_strjoin("rr", stack);
+            reverse_rotate(stack_header, operation);
+            free(operation);
+        }
+    }
+}
+
 
 void execute_moves(t_dlist **a, t_dlist **b)
 {
@@ -49,7 +75,6 @@ void	push_swap(t_dlist **a, t_dlist **b)
 	while (size_a-- > 3)
 		stack_push(a, b, "pb");
 	three_nodes(a);
-	//printfs		
 	while (*b != NULL)
 	{
 		set_node_data(*a, *b);
