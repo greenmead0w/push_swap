@@ -6,9 +6,9 @@ void	operate(t_dlist **stack_header, t_dlist *to_move, char *stack)
 	while (*stack_header != to_move)
 	{
 		if (to_move->top_half == 1)
-			rotate(stack_header, ft_strjoin("r", stack)); 
+			rotate(stack_header, ft_strjoin("r", stack)); //valgrind leaks
 		else	
-			reverse_rotate(stack_header, ft_strjoin("rr",stack));	
+			reverse_rotate(stack_header, ft_strjoin("rr",stack));	//valgrind leaks
 	}
 }
 
