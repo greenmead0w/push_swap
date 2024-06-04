@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands1.c                                        :+:      :+:    :+:   */
+/*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzuloaga <mzuloaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 13:04:02 by mzuloaga          #+#    #+#             */
-/*   Updated: 2024/06/03 13:30:11 by mzuloaga         ###   ########.fr       */
+/*   Updated: 2024/06/04 11:12:32 by mzuloaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+//1-2 to 2-1
 void	swap(t_dlist **header, char *command)
 {
 	if (ft_dlstsize(*header) < 2)
-		return;
+		return ;
 	*header = (*header)->next;
 	(*header)->previous->previous = *header;
 	(*header)->previous->next = (*header)->next;
@@ -24,7 +25,6 @@ void	swap(t_dlist **header, char *command)
 	(*header)->next = (*header)->previous;
 	(*header)->previous = NULL;
 	ft_printf("%s\n", command);
-
 }
 
 //push a_header on top of b_header
@@ -33,7 +33,7 @@ void	stack_push(t_dlist **a_header, t_dlist **b_header, char *command)
 	t_dlist	*temp;
 
 	if (ft_dlstsize(*a_header) == 0)
-		return;
+		return ;
 	temp = *a_header;
 	*a_header = (*a_header)->next;
 	if (*a_header != NULL)
@@ -54,6 +54,7 @@ void	stack_push(t_dlist **a_header, t_dlist **b_header, char *command)
 	ft_printf("%s\n", command);
 }
 
+// top number to bottom
 void	rotate(t_dlist **header, char *command)
 {
 	t_dlist	*last;
@@ -70,10 +71,9 @@ void	rotate(t_dlist **header, char *command)
 	last->next->next = NULL;
 	if (command != NULL)
 		ft_printf("%s\n", command);
-
-
 }
 
+//bottom number to top
 void	reverse_rotate(t_dlist **header, char *command)
 {
 	t_dlist	*last;
@@ -92,6 +92,7 @@ void	reverse_rotate(t_dlist **header, char *command)
 		ft_printf("%s\n", command);
 }
 
+//rr and rrr
 void	double_moves(t_dlist **header_a, t_dlist **header_b, char *command)
 {
 	if (ft_strncmp(command, "rr", 3) == 0)
@@ -106,4 +107,3 @@ void	double_moves(t_dlist **header_a, t_dlist **header_b, char *command)
 	}
 	ft_printf("%s\n", command);
 }
-

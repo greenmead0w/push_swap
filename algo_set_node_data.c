@@ -1,11 +1,22 @@
-#include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo_set_node_data.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mzuloaga <mzuloaga@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 11:16:21 by mzuloaga          #+#    #+#             */
+/*   Updated: 2024/06/04 11:20:02 by mzuloaga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "push_swap.h"
 
 /*as if stack is array each element is indexed and
 sets above_median property*/
 void	get_index(t_dlist *header)
 {
-		int	i;
+	int	i;
 	int	centerline;
 
 	i = 0;
@@ -29,31 +40,7 @@ void	get_index(t_dlist *header)
     2. if no bigger number, smallest number*/
 void	bond_nodes(t_dlist *a, t_dlist *b)
 {
-	t_dlist	*current_a;
-	t_dlist	*target_node;
-	long			best_match_index;
-
-	while (b)
-	{
-		best_match_index = LONG_MAX;
-		current_a = a;
-		while (current_a)
-		{
-			if (current_a->value > b->value
-				&& current_a->value < best_match_index)
-			{
-				best_match_index = current_a->value;
-				target_node = current_a;
-			}
-			current_a = current_a->next;
-		}
-		if (LONG_MAX == best_match_index)
-			b->bonded_node = min_node(a);
-		else
-			b->bonded_node = target_node;
-		b = b->next;
-	}
-	/*t_dlist	*temp_a;
+	t_dlist	*temp_a;
 	t_dlist	*bond;
 	long	closest_value;
 
@@ -76,7 +63,7 @@ void	bond_nodes(t_dlist *a, t_dlist *b)
 		else
 			b->bonded_node = bond;
 		b = b->next;
-	}*/
+	}
 }
 
 //cost of pushing bond node + node in b to the top of each stack
@@ -103,13 +90,12 @@ void	get_cost(t_dlist *a, t_dlist *b)
 //find node with min cost and set its property to true
 void	get_min_cost(t_dlist *b)
 {
-	long			cost;
+	long	cost;
 	t_dlist	*min_cost_node;
 
 	if (b == NULL)
 		return ;
 	cost = LONG_MAX;
-	//min_cost_node = b;
 	while (b != NULL)
 	{
 		if (b->cost < cost)
@@ -122,12 +108,11 @@ void	get_min_cost(t_dlist *b)
 	min_cost_node->min_cost = 1;
 }
 
-
 void	set_node_data(t_dlist *a, t_dlist *b)
 {
 	get_index(a);
 	get_index(b);
-    bond_nodes(a, b);
+	bond_nodes(a, b);
 	get_cost(a, b);
 	get_min_cost(b);
 }

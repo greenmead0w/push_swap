@@ -6,7 +6,7 @@
 /*   By: mzuloaga <mzuloaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 13:16:12 by mzuloaga          #+#    #+#             */
-/*   Updated: 2024/06/03 13:20:13 by mzuloaga         ###   ########.fr       */
+/*   Updated: 2024/06/04 11:53:04 by mzuloaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	stack_build(t_dlist **a, char **argv, int flag)
 	i = 0;
 	while (argv[i] != NULL)
 	{
-		if (is_num(argv[i]) == 0) 
+		if (is_num(argv[i]) == 0)
 			unwind(a, argv, flag);
 		value = ft_atol(argv[i]);
 		if (value < INT_MIN || value > INT_MAX)
